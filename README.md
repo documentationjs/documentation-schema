@@ -69,7 +69,7 @@ Minimal example
 
 [YAML](http://yaml.org/) example
 
-```js
+```yaml
 name: "sort"
 kind: "function"
 description: "Create a stream.Transform that sorts its input of comments\nby the name tag, if any, and otherwise by filename."
