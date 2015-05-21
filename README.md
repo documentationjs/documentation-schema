@@ -9,7 +9,7 @@ or written by hand.
 1. documentation extraction or authorship
 2. output formatting
 
-Maximum example
+### Maximum example
 
 ```js
 {
@@ -45,7 +45,7 @@ Maximum example
 }
 ```
 
-Minimal example
+### Minimal example
 
 ```js
 {
@@ -67,7 +67,7 @@ Minimal example
 }
 ```
 
-[YAML](http://yaml.org/) example
+### [YAML](http://yaml.org/) example
 
 ```yaml
 name: sort
