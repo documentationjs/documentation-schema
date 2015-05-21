@@ -70,15 +70,16 @@ Minimal example
 [YAML](http://yaml.org/) example
 
 ```yaml
-name: "sort"
-kind: "function"
-description: "Create a stream.Transform that sorts its input of comments\nby the name tag, if any, and otherwise by filename."
-memberof: "module"
-scope: "static"
+name: sort
+kind: function
+description: |
+  Create a stream.Transform that sorts its input of
+  comments by the name tag, if any, and otherwise by filename.
+memberof: module
+scope: static
 returns:
-  title": "returns"
-  description": "a transform stream"
+  description: a transform stream
   type:
-    type: "NameExpression",
-    name: "stream.Transform"
+    type: NameExpression
+    name: stream.Transform
 ```
