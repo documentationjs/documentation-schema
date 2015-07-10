@@ -67,19 +67,38 @@ or written by hand.
 }
 ```
 
-### [YAML](http://yaml.org/) example
+## Meaning
 
-```yaml
-name: sort
-kind: function
-description: |
-  Create a stream.Transform that sorts its input of
-  comments by the name tag, if any, and otherwise by filename.
-memberof: module
-scope: static
-returns:
-  description: a transform stream
-  type:
-    type: NameExpression
-    name: stream.Transform
+```
+{
+  "name": // this is the name of the function, object, class, or namespace
+  "kind": // http://usejsdoc.org/tags-type.html
+  "description": // http://usejsdoc.org/tags-description.html
+  "memberof": // http://usejsdoc.org/tags-memberof.html
+  "scope": // http://usejsdoc.org/tags-instance.html
+  "context": {
+    "loc": {
+      // this contains 'start' and 'end' objects in the same style
+      // as the esprima javascript parser
+    },
+    "file": // absolute path to the relevant source code
+    "code": // extracted source code, potentially excerpted
+  },
+  "returns": [
+    {
+      "title": "returns",
+      "description": "a transform stream",
+      "type": {
+        "type": "NameExpression",
+        "name": "stream.Transform"
+      }
+    }
+  ],
+  "params": [
+    ...
+  ],
+  "throws": [
+    ...
+  ]
+}
 ```
