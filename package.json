@@ -1,0 +1,23 @@
+{
+  "name": "documentation-schema",
+  "version": "0.0.0",
+  "description": "An abstract schema for JSDoc",
+  "main": "index.js",
+  "scripts": {
+    "build": "documentation build index.js",
+    "test": "documentation lint index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/documentationjs/api-json.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/documentationjs/api-json/issues"
+  },
+  "homepage": "https://github.com/documentationjs/api-json#readme",
+  "devDependencies": {
+    "documentation": "^4.0.0-beta"
+  }
+}
