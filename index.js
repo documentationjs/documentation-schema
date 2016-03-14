@@ -49,6 +49,8 @@
 
 /**
  * @typedef {Object} Author
+ * @property {String} name
+ * @property {String} email
  */
 
 /**
@@ -57,6 +59,8 @@
 
 /**
  * @typedef {Object} Example
+ * @property {Unist} caption
+ * @property {String} code
  */
 
 /**
@@ -72,6 +76,9 @@
 
 /**
  * @typedef {Object} Parameter
+ * @property {Type} type
+ * @property {Path} name
+ * @property {Unist} description
  */
 
 /**
@@ -80,14 +87,21 @@
 
 /**
  * @typedef {Object} Property
+ * @property {Type} type
+ * @property {Path} name
+ * @property {Unist} description
  */
 
 /**
  * @typedef {Object} Return
+ * @property {Type} type
+ * @property {Unist} description
  */
 
 /**
  * @typedef {Object} Throw
+ * @property {Type} type
+ * @property {Unist} description
  */
 
 /**
