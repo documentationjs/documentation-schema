@@ -1,7 +1,7 @@
 /**
  * @typedef {Object} Comment
  * @property {boolean} abstract
- * @property {('public'|'protected'|'private')} access
+ * @property {Access} access
  * @property {Path[]} augments
  * @property {Author[]} authors
  * @property {*} borrows
@@ -20,7 +20,7 @@
  * @property {boolean} ignore
  * @property {Path[]} implements
  * @property {boolean} interface
- * @property {('class'|'constant'|'event'|'external'|'file'|'function'|'member'|'mixin'|'module'|'namespace'|'typedef')} kind
+ * @property {Kind} kind
  * @property {*} license
  * @property {Path[]} listens
  * @property {Loc} loc
@@ -34,8 +34,8 @@
  * @property {boolean} readonly
  * @property {Path[]} requires
  * @property {Return[]} returns
- * @property {('global'|'static'|'instance'|'inner')} scope
- * @property {Unist[]} see
+ * @property {Scope} scope
+ * @property {Unist[]} sees
  * @property {Version} since
  * @property {Unist} summary
  * @property {Path} this
@@ -45,6 +45,11 @@
  * @property {Type} type
  * @property {*} variation
  * @property {Version} version
+ */
+
+/**
+ * Valid values are `'public'`, `'private'`, and `'protected'`.
+ * @typedef {String} Access
  */
 
 /**
@@ -64,6 +69,12 @@
  */
 
 /**
+ * Valid values are `'class'`, `'constant'`, `'event'`, `'external'`, `'file'`, `'function'`, `'member'`, `'mixin'`,
+ * `'module'`, `'namespace'`, and `'typedef'`.
+ * @typedef {String} Kind
+ */
+
+/**
  * @typedef {Object} Loc
  */
 
@@ -79,6 +90,7 @@
  * @property {Type} type
  * @property {Path} name
  * @property {Unist} description
+ * @property {Property[]} properties
  */
 
 /**
@@ -90,12 +102,18 @@
  * @property {Type} type
  * @property {Path} name
  * @property {Unist} description
+ * @property {Property[]} properties
  */
 
 /**
  * @typedef {Object} Return
  * @property {Type} type
  * @property {Unist} description
+ */
+
+/**
+ * Valid values are `'global'`, `'static'`, `'instance'`, and `'inner'`.
+ * @typedef {String} Scope
  */
 
 /**
