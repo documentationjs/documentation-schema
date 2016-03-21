@@ -134,13 +134,95 @@
  * @typedef {String} Version
  */
 
+var documentation = require('documentation');
+
 /*
  * The callback of this export is called with a single argument consisting of an array of
  * objects which define a schema for JSDoc. Because these objects are themselves defined
  * in JSDoc, they conform to the schema which they themselves define. Very meta!
  */
 module.exports = function (callback) {
-  require('documentation')(__filename, {}, function (err, result) {
+  documentation(__filename, {}, function (err, result) {
+    callback(result);
+  });
+};
+
+function typeToSchema(type) {
+  if (type.name === 'boolean') {
+    return {
+      type: 'boolean'
+    };
+  } else if (type.name === 'String') {
+    return {
+      type: 'string'
+    };
+  } else if (type.type === 'NameExpression') {
+    return {
+      $ref: '#/definitions/' + type.name
+    };
+  } else if (type.type === 'TypeApplication' && type.expression.name === 'Array') {
+    return {
+      type: 'array',
+      items: typeToSchema(type.applications[0])
+    };
+  } else if (type.type === 'AllLiteral') {
+    return {};
+  } else {
+    throw new Error('unknown type ' + type);
+  }
+}
+
+function commentToSchema(comment) {
+  switch (comment.name) {
+  case 'Access':
+    return {
+      type: 'string',
+      enum: ['public', 'private', 'protected']
+    };
+
+  case 'Kind':
+    return {
+      type: 'string',
+      enum: [
+        'class', 'constant', 'event', 'external', 'file', 'function',
+        'member', 'mixin', 'module', 'namespace', 'typedef'
+      ]
+    };
+
+  case 'Scope':
+    return {
+      type: 'string',
+      enum: ['global', 'static', 'instance', 'inner']
+    };
+
+  default:
+    return {
+      type: 'object',
+      properties: (comment.properties || []).reduce(function (properties, property) {
+        properties[property.name] = typeToSchema(property.type);
+        return properties;
+      }, {})
+    };
+  }
+}
+
+module.exports.jsonSchema = function (callback) {
+  module.exports(function (comments) {
+    var result = commentToSchema(comments.find(function (comment) {
+      return comment.name === 'Comment';
+    }));
+
+    result.$schema = 'http://json-schema.org/draft-04/schema#';
+
+    result.definitions = comments
+      .filter(function (comment) {
+        return comment.name !== 'Comment';
+      })
+      .reduce(function (definitions, comment) {
+        definitions[comment.name] = commentToSchema(comment);
+        return definitions;
+      }, {});
+
     callback(result);
   });
 };
