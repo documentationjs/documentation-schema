@@ -5,7 +5,6 @@
  * @property {Path[]} augments
  * @property {Author[]} authors
  * @property {*} borrows
- * @property {*} callback
  * @property {Unist} classdesc
  * @property {*} constructs
  * @property {Context} context
