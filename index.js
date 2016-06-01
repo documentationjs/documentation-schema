@@ -141,7 +141,7 @@ var documentation = require('documentation');
  * in JSDoc, they conform to the schema which they themselves define. Very meta!
  */
 module.exports = function (callback) {
-  documentation(__filename, {}, function (err, result) {
+  documentation.build(__filename, {}, function (err, result) {
     callback(result);
   });
 };
