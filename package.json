@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/documentationjs/api-json#readme",
   "devDependencies": {
-    "documentation": "^4.0.0-beta",
+    "documentation": "4.0.0-beta5",
     "json-schema": "^0.2.2",
     "tap": "^5.7.0"
   }

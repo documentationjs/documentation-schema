@@ -5,22 +5,16 @@ var schema = require('.');
 var validate = require('json-schema');
 
 test('schema', function (t) {
-  schema(function (comments) {
-    t.ok(comments);
-    t.end();
-  });
+  t.ok(schema.comments, 'exposes comments');
+  t.end();
 });
 
 test('self-validation', function (t) {
-  schema.jsonSchema(function (jsonSchema) {
-    schema(function (comments) {
-      comments.forEach(function (comment) {
-        var errors = validate(comment, jsonSchema).errors;
-        errors.forEach(function (error) {
-          t.ifError(error);
-        });
-      });
-      t.end();
+  schema.comments.forEach(function (comment) {
+    var errors = validate(comment, schema.jsonSchema).errors;
+    errors.forEach(function (error) {
+      t.ifError(error);
     });
   });
+  t.end();
 });

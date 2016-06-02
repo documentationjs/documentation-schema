@@ -134,17 +134,18 @@
  */
 
 var documentation = require('documentation');
+var fs = require('fs');
 
 /*
  * The callback of this export is called with a single argument consisting of an array of
  * objects which define a schema for JSDoc. Because these objects are themselves defined
  * in JSDoc, they conform to the schema which they themselves define. Very meta!
  */
-module.exports = function (callback) {
-  documentation.build(__filename, {}, function (err, result) {
-    callback(result);
-  });
-};
+var comments = documentation.buildSync([{
+  source: fs.readFileSync(__filename, 'utf8'),
+  file: __filename
+}], {});
+module.exports.comments = comments;
 
 function typeToSchema(type) {
   if (type.name === 'boolean') {
@@ -205,23 +206,21 @@ function commentToSchema(comment) {
   }
 }
 
-module.exports.jsonSchema = function (callback) {
-  module.exports(function (comments) {
-    var result = commentToSchema(comments.find(function (comment) {
-      return comment.name === 'Comment';
-    }));
+module.exports.jsonSchema = (function () {
+  var result = commentToSchema(comments.find(function (comment) {
+    return comment.name === 'Comment';
+  }));
 
-    result.$schema = 'http://json-schema.org/draft-04/schema#';
+  result.$schema = 'http://json-schema.org/draft-04/schema#';
 
-    result.definitions = comments
-      .filter(function (comment) {
-        return comment.name !== 'Comment';
-      })
-      .reduce(function (definitions, comment) {
-        definitions[comment.name] = commentToSchema(comment);
-        return definitions;
-      }, {});
+  result.definitions = comments
+    .filter(function (comment) {
+      return comment.name !== 'Comment';
+    })
+    .reduce(function (definitions, comment) {
+      definitions[comment.name] = commentToSchema(comment);
+      return definitions;
+    }, {});
 
-    callback(result);
-  });
-};
+  return result;
+})();
