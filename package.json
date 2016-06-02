@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "documentation build index.js",
+    "prepublish": "node prepublish.js",
     "test": "tap test.js"
   },
   "repository": {
