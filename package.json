@@ -21,6 +21,6 @@
   "devDependencies": {
     "documentation": "4.0.0-beta5",
     "json-schema": "^0.2.2",
-    "tap": "^5.7.0"
+    "tap": "^10.3.2"
   }
 }
